@@ -1,7 +1,12 @@
-import React from 'react'
+import SideBar from '../components/SideBar'
 
 export default function Home() {
   return (
-    <div>Home</div>
+    <div className='flex flex-wrap'>
+
+      <SideBar/>
+      <div>Home</div>
+
+    </div>
   )
 }
