@@ -10,8 +10,12 @@ export default {
         "dark-blue" : "#0d0764",
         "white" : "#fbfaf8",
         "cream" : "#ebede9",
-        "dark-cream" : "#a0aa97"
-      }
+        "dark-cream" : "#a0aa97",
+        "gold" : "#D1A309"
+      },
+      zIndex: {
+        '-1': '-1',
+      },
     },
   },
   plugins: [],
