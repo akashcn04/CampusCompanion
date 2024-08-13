@@ -34,7 +34,7 @@ export default function SideBar() {
 
           <div className='flex flex-wrap flex-col max-w-full'>
             <p className='text-white text-7xl font-bold w-full'>Brain</p>
-            <p className='text-dark-cream text-7xl font-bold w-full'>Bros</p>
+            <p className='text-dark-cream text-7xl font-bold w-full'>Bros.</p>
           </div>
 
           <div className='absolute top-48 left-15 items-center'>
