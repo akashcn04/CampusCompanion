@@ -11,11 +11,13 @@ export default {
         "white" : "#fbfaf8",
         "cream" : "#ebede9",
         "dark-cream" : "#a0aa97",
-        "gold" : "#D1A309",
+        "gold" : "#ffdc73",
         "light-ivory" : "#FFF7E2",
         "pink-cream" : "#F7F0DA",
-        "olive-green" : "#96C980",
-        "skin" : "#FFD09F"
+        "olive-green" : "#1fd655",
+        "skin" : "#FFD09F",
+        "yellow-cream" : "#fef8dd",
+        "choco-cream" : "#ffe7c7"
       },
       zIndex: {
         '-1': '-1',
