@@ -32,7 +32,7 @@ export default function SignUp() {
        </div>       
      </form>  
      <footer>
-       <a class="text-white hover:text-pink-700 text-sm float-right" href="/log-in">Already have an account</a>
+       <a class="text-black lg:text-white hover:text-pink-700 text-sm float-right" href="/log-in">Already have an account ?</a>
      </footer>   
    </div>
 </div>

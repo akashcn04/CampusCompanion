@@ -18,9 +18,9 @@ const SideBarButton = ({ to, children, icon }) => {
 };
 
 
-export default function SideBar() {
+export default function SideBar({isOpen,setIsOpen}) { //
 
-  const [isOpen, setIsOpen] = useState(false);
+ 
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
@@ -28,7 +28,7 @@ export default function SideBar() {
     <div className={`bg-dark-blue h-full p-5 pt-8 ${isOpen ?'w-full' : 'w-1/5'} lg:w-[375px] relative transform transition-transform`}>
       <div className='flex flex-col flex-wrap justify-between'>
         <FaBars  onClick={toggleSidebar}
-        className= 'text-white text-2xl absolute right-6 lg:right-10 top-9 cursor-pointer lg:hidden'/>
+        className= 'text-white text-2xl absolute left-3 lg:right-10 top-9 cursor-pointer lg:hidden'/>
 
         <div className={`absolute top-28 flex flex-wrap flex-col ${!isOpen && 'hidden'} lg:block` }>
 
