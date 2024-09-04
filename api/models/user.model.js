@@ -4,7 +4,12 @@ const userSchema = new mongoose.Schema({
     username : {
         type : String,
         required : true,
-        unique : true
+    },
+    srn: {
+        type: String,
+        required: true,
+        unique: true,
+        match: /^PES[a-zA-Z0-9]{10}$/,
     },
     email : {
         type : String,
