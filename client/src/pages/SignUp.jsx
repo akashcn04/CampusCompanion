@@ -12,20 +12,20 @@ export default function SignUp() {
          <input class="w-full p-2 mb-6 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-gray-300" type="text" name="username"/>
        </div>
        <div>
-         <label class="block mb-2 text-white" for="password">SRN</label>
-         <input class="w-full p-2 mb-6 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-gray-300" type="password" name="password"/>
+         <label class="block mb-2 text-white" for="srn">SRN</label>
+         <input class="w-full p-2 mb-6 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-gray-300"  pattern="PES[a-zA-Z0-9]{10}" name="srn"/>
        </div>
        <div>
-         <label class="block mb-2 text-white" for="password">E-Mail</label>
-         <input class="w-full p-2 mb-6 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-gray-300" type="password" name="password"/>
+         <label class="block mb-2 text-white" for="email" >E-Mail</label>
+         <input class="w-full p-2 mb-6 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-gray-300" type="email" name="email" pattern="pes[0-9]{10}@pesu.pes.edu" placeholder="Please use your college email..."/>
        </div>
        <div>
          <label class="block mb-2 text-white" for="password">Password</label>
          <input class="w-full p-2 mb-6 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-gray-300" type="password" name="password"/>
        </div>
        <div>
-         <label class="block mb-2 text-white" for="password">Confirm Password</label>
-         <input class="w-full p-2 mb-6 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-gray-300" type="password" name="password"/>
+         <label class="block mb-2 text-white" for="cpassword">Confirm Password</label>
+         <input class="w-full p-2 mb-6 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-gray-300" type="password" name="cpassword"/>
        </div>
        <div>          
          <input class="w-full bg-indigo-700 hover:bg-pink-700 text-white font-bold py-2 px-4 mb-6 rounded" type="submit"/>
