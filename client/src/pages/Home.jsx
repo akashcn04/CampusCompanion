@@ -1,5 +1,6 @@
 import SideBar from '../components/SideBar'
 import { useState } from 'react';
+import UserCard from '../components/UserCard';
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +35,10 @@ export default function Home() {
         <div className='text-3xl lg:text-4xl font-bold mt-1 lg:mt-7'>My Tutors : </div>
 
         <div className='shadow-xl bg-gray-100 mt-6 mb-4 min-h-[75vh] lg:min-h-[80vh] lg:min-w-[45vw]'>
-
+            <div className='mt-3 flex justify-center'>
+              <UserCard/>
+            </div>
+            
         </div>
       
       </div>

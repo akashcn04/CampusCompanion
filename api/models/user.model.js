@@ -20,6 +20,18 @@ const userSchema = new mongoose.Schema({
         type : String,
         required : true,    
     },
+    tutorList : [
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : 'User'
+        }
+    ],
+    tuteeList : [
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : 'User'
+        }
+    ]
 
 },{ timestamps : true});
 
