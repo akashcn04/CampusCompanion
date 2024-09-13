@@ -8,7 +8,7 @@ export default function LogIn() {
 
 
   const [formData,setFormData] = useState({});
-  const {loading,error} = useSelector((state) => state.user)
+  const {currentUser,loading,error} = useSelector((state) => state.user)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
@@ -43,21 +43,16 @@ export default function LogIn() {
       }
   
       dispatch(signInSuccess(data))
+      
       navigate("/home")
 
     }catch(error){
-      dispatch(signInFailure(data.message))
+      dispatch(signInFailure(error.message))
     }
 
   }
 
-  useEffect(() => {
-    if (error) {
-      alert(error);
-      setError(''); 
-    }
-  }, [error]);
-
+ 
   console.log(formData)
 
   return (
@@ -68,7 +63,7 @@ export default function LogIn() {
       <form onSubmit={handleSubmit}>
         <div>
           <label className="block mb-2 text-white" >SRN</label>
-          <input className="w-full p-2 mb-6 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-gray-300" type="text" name="srn" ID="srn"
+          <input className="w-full p-2 mb-6 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-gray-300" type="text" name="srn" id="srn"
               onChange={handleChange}/>
         </div>
         <div>

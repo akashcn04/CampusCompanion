@@ -21,6 +21,10 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); 
+    setFormData({
+      ...formData,
+      role : "tutee"
+    })
     try{
       setLoading(true);
       const res = await fetch('/api/auth/signup',

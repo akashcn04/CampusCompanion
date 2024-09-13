@@ -1,9 +1,29 @@
 import SideBar from '../components/SideBar'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import UserCard from '../components/UserCard';
+import { current } from '@reduxjs/toolkit';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
+  const {currentUser} = useSelector((state) => state.user)
+  const {tutorList,srn} = currentUser;
+  const navigate = useNavigate()
+  
+  const handleTutorClick = () => {
+    const year = parseInt(srn.substring(6,8))
+    const totyear = 2000 + year
+    const currentYear = new Date().getFullYear();
+
+    if(currentYear - totyear > 1){
+      navigate("/tutor-form")
+    }else{
+      alert("You need to be atlest in second year of your college.")
+    }
+  }
+
 
   return (
     
@@ -35,8 +55,10 @@ export default function Home() {
         <div className='text-3xl lg:text-4xl font-bold mt-1 lg:mt-7'>My Tutors : </div>
 
         <div className='shadow-xl bg-gray-100 mt-6 mb-4 min-h-[75vh] lg:min-h-[80vh] lg:min-w-[45vw]'>
-            <div className='mt-3 flex justify-center'>
-              <UserCard/>
+            <div className='mt-3 flex flex-col gap-3 justify-center ml-3'>  
+              {
+                tutorList.map((id,index) => (<UserCard id={id} key={index}/>))
+              }
             </div>
             
         </div>
@@ -44,12 +66,13 @@ export default function Home() {
       </div>
 
       {/* Vertical divider */}
-      <div class="border-2 border-gray-300 h-screen mt-5 ml-2 lg:ml-3 hidden lg:block"></div>
+      <div className="border-2 border-gray-300 h-screen mt-5 ml-2 lg:ml-3 hidden lg:block"></div>
 
 
       {/* Left Line */}
       <div>
-        <button className='border-white hover:border-dark-blue border text-nowrap rounded-full text-2xl lg:text-3xl text-white font-semibold bg-dark-blue hover:text-dark-blue hover:bg-white px-10 py-3 w-full mt-7 ml-1 lg:ml-7'> Become a tutor </button>
+        <button className='border-white hover:border-dark-blue border text-nowrap rounded-full text-2xl lg:text-3xl text-white font-semibold bg-dark-blue hover:text-dark-blue hover:bg-white px-10 py-3 w-full mt-7 ml-1 lg:ml-7'
+            onClick={handleTutorClick}> Become a tutor </button>
 
         <div className='shadow-xl bg-gray-100 mt-5 ml-2 lg:ml-10 min-h-[80vh] min-w-[21vw]'>
 

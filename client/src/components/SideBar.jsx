@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 import { FaBars,FaCircleInfo} from "react-icons/fa6";
 import {FaHome,FaSignOutAlt} from "react-icons/fa"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 import { RiChatFollowUpFill } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
+import { useDispatch } from 'react-redux';
+import { signOutFailure, signOutStart, signOutSuccess } from '../redux/user/userSlice';
 
-const SideBarButton = ({ to, children, icon }) => {
+const SideBarButton = ({ to, children, icon ,so}) => {
+
+
   return (
     <div className="flex items-center">
       {icon && <span className="mr-8 text-2xl text-white">{icon}</span>}
@@ -20,7 +24,29 @@ const SideBarButton = ({ to, children, icon }) => {
 
 export default function SideBar({isOpen,setIsOpen}) { //
 
- 
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+
+
+
+ const handleSignOut = async () => {
+    try{
+      dispatch(signOutStart())
+      const res = await fetch('/api/auth/signout');
+      const data = await res.json()
+
+      if(data.success === false){
+        dispatch(signOutFailure(data.message))
+        return 
+      }
+
+      dispatch(signOutSuccess(data))
+      navigate("/")
+      
+    }catch(error){
+      dispatch(signOutFailure(error.message))
+    }
+ }
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
@@ -39,12 +65,12 @@ export default function SideBar({isOpen,setIsOpen}) { //
 
           <div className='absolute top-48 left-15 items-center'>
             <ul className='max-w-full items-center gap-3 space-y-2'> 
-              <li><SideBarButton to="/home" icon={<FaHome/>}>Home</SideBarButton></li>
-              <li><SideBarButton to="/" icon={<LiaChalkboardTeacherSolid/>}>Get Tutor</SideBarButton></li>
-              <li><SideBarButton to="/" icon={<RiChatFollowUpFill/>}>Requests</SideBarButton></li>
-              <li><SideBarButton to="/" icon={<CgProfile/>}>Profile</SideBarButton></li>
-              <li><SideBarButton to="/" icon={<FaCircleInfo/>}>About</SideBarButton></li>
-              <li><SideBarButton to="/sign-out" icon={<FaSignOutAlt/>}>Sign Out</SideBarButton></li>
+              <li><SideBarButton to="/home" icon={<FaHome/>} so="false">Home</SideBarButton></li>
+              <li><SideBarButton to="/get-tutor" icon={<LiaChalkboardTeacherSolid/>} so="false">Get Tutor</SideBarButton></li>
+              <li><SideBarButton to="/" icon={<RiChatFollowUpFill/>} so="false">Requests</SideBarButton></li>
+              <li><SideBarButton to="/" icon={<CgProfile/>} so="false">Profile</SideBarButton></li>
+              <li><SideBarButton to="/" icon={<FaCircleInfo/>} so="false">About</SideBarButton></li>
+              <li onClick={handleSignOut}><SideBarButton to="/" icon={<FaSignOutAlt/>} so="true">Sign Out</SideBarButton></li>
             </ul>
           </div>
         </div>
