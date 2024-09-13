@@ -39,7 +39,7 @@ export default function SideBar({isOpen,setIsOpen}) { //
 
           <div className='absolute top-48 left-15 items-center'>
             <ul className='max-w-full items-center gap-3 space-y-2'> 
-              <li><SideBarButton to="/" icon={<FaHome/>}>Home</SideBarButton></li>
+              <li><SideBarButton to="/home" icon={<FaHome/>}>Home</SideBarButton></li>
               <li><SideBarButton to="/" icon={<LiaChalkboardTeacherSolid/>}>Get Tutor</SideBarButton></li>
               <li><SideBarButton to="/" icon={<RiChatFollowUpFill/>}>Requests</SideBarButton></li>
               <li><SideBarButton to="/" icon={<CgProfile/>}>Profile</SideBarButton></li>
