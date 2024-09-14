@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
         match: /^PES[a-zA-Z0-9]{10}$/,
     },
     email : {
-        type : String,
+        type : String,  
         required : true,
         unique : true
     },

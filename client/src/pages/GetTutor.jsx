@@ -1,15 +1,61 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SideBar from '../components/SideBar'
+import GetTutorCard from '../components/GetTutorCard'
 
 export default function GetTutor() {
 
     const [isOpen, setIsOpen] = useState(false);
+    const [list,setList] = useState([]);
+
+    useEffect(() => {
+
+      const fetchTutors = async () => {
+        const res = await fetch('/api/user/fetchTutors');
+        const data = await res.json()
+        setList(data)
+      }
+
+      fetchTutors()
+
+    },[])
 
   return (
     <div className='flex flex-row h-screen w-full fixed left-0 top-0'>
+        
         <div className='flex fixed left-0 top-0 h-screen w-[50px] bg-dark-blue'></div>
+        
         <SideBar className='sticky top-0' isOpen={isOpen} setIsOpen={setIsOpen}/>
 
+        <div className='shadow-xl bg-gray-100  mb-4 min-h-[75vh] lg:min-h-[80vh] lg:min-w-[75vw] flex flex-col  items-center gap-5'>
+        
+        <div className='flex flex-wrap justify-between gap-16 items-center mt-10'>
+
+          <p className='text-2xl'>Filter : </p>
+          
+          <div className='flex w-10 h10'>
+            <select>
+              <option>CSE</option>
+              <option>ECE</option>
+              <option>EEE</option>
+              <option>MEC</option>
+              <option>BIO</option>
+            </select>
+          </div>
+
+          <input placeholder='year'/>
+        </div>
+
+
+
+        <div className='border border-black w-full top-10'></div>
+        
+        {/* Tutor card listing  */}
+        <div className='mt-3 flex flex-col gap-3 justify-center ml-3'>  
+              {
+                list.map((id,index) => (<GetTutorCard id={id} key={index}/>))
+              }
+            </div>
+        </div>
         
    </div>
   )

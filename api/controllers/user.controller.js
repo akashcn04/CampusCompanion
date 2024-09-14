@@ -35,3 +35,12 @@ export const becomeTutor = async (req,res,next) => {
         next(error)
     }
 }
+
+export const fetchTutors = async (req,res,next) => {
+    try{
+        const list = await User.find({ role : "tutor"})
+        res.status(200).json(list)
+    }catch(error){
+        next(error)
+    }
+}
