@@ -32,9 +32,32 @@ const userSchema = new mongoose.Schema({
             ref : 'User'
         }
     ],
+    branch : {
+        type : String,
+    },
+    cpga : {
+        type : String,
+    },
+    year : {
+        type : String,
+    },
+    skills : {
+        type : String,
+    },
+    clubs : {
+        type : String,
+    },
+    work_experience :{
+        type : String,
+    },
+    other : {
+        type : String,
+    }
  
 
 },{ timestamps : true});
 
 const User = mongoose.model('User',userSchema);
 export default User;
+
+
