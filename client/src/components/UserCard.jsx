@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { CgProfile } from "react-icons/cg";
 import { FaExternalLinkSquareAlt } from "react-icons/fa";
 import { TbAutomaticGearbox } from 'react-icons/tb';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function UserCard({ id }) {
   const [tutor, setTutor] = useState(null);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchTutorData = async () => {
@@ -34,6 +36,10 @@ export default function UserCard({ id }) {
     fetchTutorData();
   }, [id]);
 
+  const handleCardclick = () => {
+    navigate(`/tutors/${tutor._id}`)
+  }
+
   return (
     <div className="bg-white max-w-[43vw] min-h-[12vh] rounded-lg flex items-center gap-5">
       <div className="ml-5">
@@ -43,7 +49,7 @@ export default function UserCard({ id }) {
       <div className="flex flex-col ml-5">
         <p className="font-semibold">{tutor?.username || 'Loading...'} </p>
         <div className="flex gap-1 items-center">
-          <p className="text-green-500">About</p>
+          <p className="text-green-500" onClick={handleCardclick}>About</p>
           <FaExternalLinkSquareAlt />
         </div>
       </div>

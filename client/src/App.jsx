@@ -6,7 +6,7 @@ import SignOut from './pages/SignOut'
 import LandingPage from './pages/LandingPage'
 import GetTutor from './pages/GetTutor'
 import TutorForm from './pages/TutorForm'
-
+import UserInfo from './pages/UserInfo'
 
 export default function App() {
   return (
@@ -20,6 +20,7 @@ export default function App() {
         <Route path="/" element={<LandingPage/>}/>
         <Route path="/get-tutor" element={<GetTutor/>}/>    
         <Route path="/tutor-form" element={<TutorForm/>}/>    
+        <Route path="/tutors/:tutorId" element={<UserInfo/>}/>            
       </Routes>
   
     </BrowserRouter>
