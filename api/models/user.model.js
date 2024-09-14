@@ -52,7 +52,11 @@ const userSchema = new mongoose.Schema({
     },
     other : {
         type : String,
-    }
+    },
+    role : {
+        type : String,
+    },
+  
  
 
 },{ timestamps : true});

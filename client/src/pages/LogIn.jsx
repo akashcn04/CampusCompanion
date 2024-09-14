@@ -53,7 +53,7 @@ export default function LogIn() {
   }
 
  
-  console.log(formData)
+  
 
   return (
     <div className='flex flex-col h-screen gap-8 bg-[url("/images/bg-image2.jpg")] bg-cover bg-center'>

@@ -12,7 +12,7 @@ export const info = async (req,res,next) => {
     }
 }
 
-export const updateUser = async (req,res,next) => {
+export const becomeTutor = async (req,res,next) => {
 
     try{
         const updatedUser = await User.findByIdAndUpdate(req.params.id,{
@@ -23,7 +23,8 @@ export const updateUser = async (req,res,next) => {
                 clubs : req.body.clubs,
                 skills : req.body.skills,
                 work_experience : req.body.work_experience,
-                other : req.body.other
+                other : req.body.other,
+                role : "tutor"
             }
         },{new : true})
 

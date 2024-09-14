@@ -9,21 +9,64 @@ import { useNavigate } from 'react-router-dom';
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const {currentUser} = useSelector((state) => state.user)
-  const {tutorList,srn} = currentUser;
+  const {tutorList,tuteeList,srn,role} = currentUser;
+  const [mode,setMode] = useState("tutee")
   const navigate = useNavigate()
-  
-  const handleTutorClick = () => {
-    const year = parseInt(srn.substring(6,8))
-    const totyear = 2000 + year
-    const currentYear = new Date().getFullYear();
+  var newMode;
 
-    if(currentYear - totyear > 1){
-      navigate("/tutor-form")
-    }else{
-      alert("You need to be atlest in second year of your college.")
+  useEffect(() => {
+    const savedMode = localStorage.getItem('mode');
+    if (savedMode) {
+      setMode(savedMode);
     }
+  }, []);
+  
+  var toRender,tutor_tueeList;
+  if(role==="tutor" && mode==="tutor"){
+    toRender = "students"
+    tutor_tueeList = tuteeList
+  }else{
+    toRender = "tutors"
+    tutor_tueeList = tutorList
   }
 
+  console.log(tutor_tueeList)
+  
+
+  const handleTutorClick = () => {
+    if(role === "tutee"){
+      const year = parseInt(srn.substring(6,8))
+      const totyear = 2000 + year
+      const currentYear = new Date().getFullYear();
+
+      if(currentYear - totyear > 1){
+        navigate("/tutor-form")
+      }else{
+        alert("You need to be atlest in second year of your college.")
+      }
+    }
+    else if(mode === "tutee"){
+      setMode("tutor")
+      newMode = "tutor"
+    }else{
+      setMode("tutee")
+      newMode = "tutee"
+    }
+
+    localStorage.setItem('mode', newMode); 
+    window.location.reload();
+  }
+
+  const getButtonLabel = () => {
+    if (role === 'tutee') {
+      return 'Become a Tutor';
+    } else if (role === 'tutor' && mode === 'tutee') {
+      return 'Tutor Mode';
+    } else if (role === 'tutor' && mode === 'tutor') {
+      return 'Tutee Mode';
+    }
+    return '';
+  };
 
   return (
     
@@ -52,12 +95,12 @@ export default function Home() {
         </div>
       </div>
 
-        <div className='text-3xl lg:text-4xl font-bold mt-1 lg:mt-7'>My Tutors : </div>
+        <div className='text-3xl lg:text-4xl font-bold mt-1 lg:mt-7'>{ toRender==="students" ? "My Students : " : "My Tutors :" } </div>
 
         <div className='shadow-xl bg-gray-100 mt-6 mb-4 min-h-[75vh] lg:min-h-[80vh] lg:min-w-[45vw]'>
             <div className='mt-3 flex flex-col gap-3 justify-center ml-3'>  
               {
-                tutorList.map((id,index) => (<UserCard id={id} key={index}/>))
+                tutor_tueeList.map((id,index) => (<UserCard id={id} key={index}/>))
               }
             </div>
             
@@ -72,7 +115,7 @@ export default function Home() {
       {/* Left Line */}
       <div>
         <button className='border-white hover:border-dark-blue border text-nowrap rounded-full text-2xl lg:text-3xl text-white font-semibold bg-dark-blue hover:text-dark-blue hover:bg-white px-10 py-3 w-full mt-7 ml-1 lg:ml-7'
-            onClick={handleTutorClick}> Become a tutor </button>
+            onClick={handleTutorClick}> {getButtonLabel()} </button>
 
         <div className='shadow-xl bg-gray-100 mt-5 ml-2 lg:ml-10 min-h-[80vh] min-w-[21vw]'>
 
