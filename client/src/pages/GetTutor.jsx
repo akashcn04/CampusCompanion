@@ -30,10 +30,13 @@ export default function GetTutor() {
         
         <div className='flex flex-wrap justify-between gap-16 items-center mt-10'>
 
-          <p className='text-2xl'>Filter : </p>
+        
+        <div className='flex gap-5 items-center'>
+          <label className='font-semibold text-xl'> Branch : </label>
           
-          <div className='flex w-10 h10'>
+          <div className='flex w-14 h-6'>
             <select>
+              <option>ALL</option>
               <option>CSE</option>
               <option>ECE</option>
               <option>EEE</option>
@@ -42,7 +45,24 @@ export default function GetTutor() {
             </select>
           </div>
 
-          <input placeholder='year'/>
+        </div>
+
+
+        <div className='flex gap-5 items-center'>
+          
+          <label className='font-bold text-xl'>  Year : </label>
+
+          <div className='flex w-14 h-6'>
+            <select>
+              <option>ALL</option>
+              <option>2nd</option>
+              <option>3rd</option>
+              <option>4th</option>
+            </select>
+          </div>
+          
+       </div>
+          
         </div>
 
 

@@ -42,6 +42,8 @@ export default function UserCard({ id }) {
 
   return (
     <div className="bg-white w-[60vw] min-h-[12vh] rounded-lg flex items-center gap-5">
+      
+      
       <div className="ml-5">
         <CgProfile className="text-6xl" />
       </div>
@@ -52,7 +54,29 @@ export default function UserCard({ id }) {
           <p className="text-green-500" onClick={handleCardclick}>About</p>
           <FaExternalLinkSquareAlt />
         </div>
+        <div className='flex gap-4 text-slate-500'>
+          <p> {tutor?.branch} </p>
+          <p> {tutor?.year} </p>
+        </div>
+        
       </div>
+
+      <div className='flex ml-auto gap-5 font-bold mr-5'>
+        
+        <div className='flex flex-col text-center'>
+          <p> Score </p>
+          <p> 250 </p>
+        </div>
+
+        <div className='flex flex-col text-center'>
+          <p> Rank  </p>
+          <p> 10 </p>
+        </div>
+        
+
+      </div>
+
+
     </div>
   );
 }
