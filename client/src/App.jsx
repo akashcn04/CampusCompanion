@@ -7,6 +7,8 @@ import LandingPage from './pages/LandingPage'
 import GetTutor from './pages/GetTutor'
 import TutorForm from './pages/TutorForm'
 import UserInfo from './pages/UserInfo'
+import Profile from './pages/Profile'
+import EditForm from './pages/EditForm'
 
 export default function App() {
   return (
@@ -20,7 +22,9 @@ export default function App() {
         <Route path="/" element={<LandingPage/>}/>
         <Route path="/get-tutor" element={<GetTutor/>}/>    
         <Route path="/tutor-form" element={<TutorForm/>}/>    
-        <Route path="/tutors/:tutorId" element={<UserInfo/>}/>            
+        <Route path="/tutors/:tutorId" element={<UserInfo/>}/>      
+        <Route path="/profile" element={<Profile/>}/>    
+        <Route path="/edit-form" element={<EditForm/>}> </Route>  
       </Routes>
   
     </BrowserRouter>

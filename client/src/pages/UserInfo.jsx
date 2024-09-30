@@ -57,24 +57,24 @@ const [isOpen, setIsOpen] = useState(false);
             </div>
         </div>
 
-        <div className='flex mt-10 '>
+        <div className='flex mt-10 gap-2'>
             <span> CGPA : </span>
             <p> {tutor.cgpa} </p>
         </div>
 
-        <div className='flex '>
+        <div className='flex gap-2'>
             <span> Skills : </span>
             <p> {tutor.skills} </p>
         </div>
-        <div className='flex'>
+        <div className='flex gap-2'>
             <span> Clubs : </span>
             <p> {tutor.clubs} </p>
         </div>        
-        <div className='flex'>
+        <div className='flex gap-2'>
             <span> Work experience : </span>
             <p> {tutor.work_experience} </p>
         </div>        
-        <div className='flex'>
+        <div className='flex gap-2'>
             <span> Others : </span>
             <p> {tutor.other} </p>
         </div>

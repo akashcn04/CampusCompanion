@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema({
     branch : {
         type : String,
     },
-    cpga : {
+    cgpa : {
         type : String,
     },
     year : {

@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 import { RiChatFollowUpFill } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signOutFailure, signOutStart, signOutSuccess } from '../redux/user/userSlice';
 
 const SideBarButton = ({ to, children, icon ,so}) => {
@@ -26,8 +26,9 @@ export default function SideBar({isOpen,setIsOpen}) { //
 
   const dispatch = useDispatch();
   const navigate = useNavigate()
+  const {currentUser} = useSelector((state) => state.user)
 
-
+  
 
  const handleSignOut = async () => {
     try{
@@ -68,7 +69,7 @@ export default function SideBar({isOpen,setIsOpen}) { //
               <li><SideBarButton to="/home" icon={<FaHome/>} so="false">Home</SideBarButton></li>
               <li><SideBarButton to="/get-tutor" icon={<LiaChalkboardTeacherSolid/>} so="false">Get Tutor</SideBarButton></li>
               <li><SideBarButton to="/" icon={<RiChatFollowUpFill/>} so="false">Requests</SideBarButton></li>
-              <li><SideBarButton to="/" icon={<CgProfile/>} so="false">Profile</SideBarButton></li>
+              {currentUser.role === "tutor" && <li><SideBarButton to="/profile" icon={<CgProfile/>} so="false">Profile</SideBarButton></li>}
               <li><SideBarButton to="/" icon={<FaCircleInfo/>} so="false">About</SideBarButton></li>
               <li onClick={handleSignOut}><SideBarButton to="/" icon={<FaSignOutAlt/>} so="true">Sign Out</SideBarButton></li>
             </ul>
