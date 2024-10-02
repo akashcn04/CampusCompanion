@@ -68,9 +68,9 @@ export default function SideBar({isOpen,setIsOpen}) { //
             <ul className='max-w-full items-center gap-3 space-y-2'> 
               <li><SideBarButton to="/home" icon={<FaHome/>} so="false">Home</SideBarButton></li>
               <li><SideBarButton to="/get-tutor" icon={<LiaChalkboardTeacherSolid/>} so="false">Get Tutor</SideBarButton></li>
-              <li><SideBarButton to="/" icon={<RiChatFollowUpFill/>} so="false">Requests</SideBarButton></li>
+              <li><SideBarButton to="/requests" icon={<RiChatFollowUpFill/>} so="false">Requests</SideBarButton></li>
               {currentUser.role === "tutor" && <li><SideBarButton to="/profile" icon={<CgProfile/>} so="false">Profile</SideBarButton></li>}
-              <li><SideBarButton to="/" icon={<FaCircleInfo/>} so="false">About</SideBarButton></li>
+              <li><SideBarButton to="/about" icon={<FaCircleInfo/>} so="false">About</SideBarButton></li>
               <li onClick={handleSignOut}><SideBarButton to="/" icon={<FaSignOutAlt/>} so="true">Sign Out</SideBarButton></li>
             </ul>
           </div>

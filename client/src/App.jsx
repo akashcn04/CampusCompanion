@@ -10,6 +10,7 @@ import UserInfo from './pages/UserInfo'
 import Profile from './pages/Profile'
 import EditForm from './pages/EditForm'
 import About from './pages/About'
+import Requests from './pages/Requests'
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="/profile" element={<Profile/>}/>    
         <Route path="/edit-form" element={<EditForm/>}> </Route>  
         <Route path="/about" element={<About/>}></Route> 
+        <Route path="/requests" element={<Requests/>}></Route>
       </Routes>
   
     </BrowserRouter>
