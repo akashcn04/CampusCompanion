@@ -9,6 +9,7 @@ import TutorForm from './pages/TutorForm'
 import UserInfo from './pages/UserInfo'
 import Profile from './pages/Profile'
 import EditForm from './pages/EditForm'
+import About from './pages/About'
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/tutors/:tutorId" element={<UserInfo/>}/>      
         <Route path="/profile" element={<Profile/>}/>    
         <Route path="/edit-form" element={<EditForm/>}> </Route>  
+        <Route path="/about" element={<About/>}></Route> 
       </Routes>
   
     </BrowserRouter>

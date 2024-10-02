@@ -5,7 +5,10 @@ import GetTutorCard from '../components/GetTutorCard'
 export default function GetTutor() {
 
     const [isOpen, setIsOpen] = useState(false);
+    const [branch,setBranch] = useState("ALL")
+    const [year,setYear] = useState("ALL")
     const [list,setList] = useState([]);
+    const [filteredTutors, setFilteredTutors] = useState([]);
 
     useEffect(() => {
 
@@ -17,7 +20,25 @@ export default function GetTutor() {
 
       fetchTutors()
 
+      
+      
     },[])
+
+    useEffect(() => {
+      let updatedList = list;
+  
+      if (branch !== "ALL") {
+        updatedList = updatedList.filter(tutor => tutor.branch.toLowerCase() === branch.toLocaleLowerCase());
+      }
+  
+      if (year !== "ALL") {
+        updatedList = updatedList.filter(tutor => tutor.year[0] === year[0]);
+      }
+
+      updatedList = updatedList.sort((a, b) => a.rank - b.rank);
+  
+      setFilteredTutors(updatedList);
+    }, [branch, year, list]);
 
   return (
     <div className='flex flex-row h-screen w-full fixed left-0 top-0'>
@@ -35,7 +56,7 @@ export default function GetTutor() {
           <label className='font-semibold text-xl'> Branch : </label>
           
           <div className='flex w-14 h-6'>
-            <select>
+            <select value={branch} onChange={(e) => setBranch(e.target.value)}>
               <option>ALL</option>
               <option>CSE</option>
               <option>ECE</option>
@@ -53,7 +74,7 @@ export default function GetTutor() {
           <label className='font-bold text-xl'>  Year : </label>
 
           <div className='flex w-14 h-6'>
-            <select>
+            <select value={year} onChange={(e) => setYear(e.target.value)}>
               <option>ALL</option>
               <option>2nd</option>
               <option>3rd</option>
@@ -72,7 +93,7 @@ export default function GetTutor() {
         {/* Tutor card listing  */}
         <div className='mt-3 flex flex-col gap-3 justify-center ml-3'>  
               {
-                list.map((id,index) => (<GetTutorCard id={id} key={index}/>))
+                filteredTutors.map((id,index) => (<GetTutorCard id={id} key={index}/>))
               }
             </div>
         </div>

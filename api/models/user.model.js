@@ -56,7 +56,14 @@ const userSchema = new mongoose.Schema({
     role : {
         type : String,
     },
-  
+    rank : {
+        type : Number,
+        default : 0
+    },
+    score : {
+        type : Number,
+        default : 0
+    }
  
 
 },{ timestamps : true});

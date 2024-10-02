@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import SideBar from '../components/SideBar';
 import { CgProfile } from "react-icons/cg";
+import { useSelector } from 'react-redux';
 
 const TutorDetails = () => {
 const [isOpen, setIsOpen] = useState(false);
   const { tutorId } = useParams(); // Extract tutorId from URL
   const location = useLocation();
   const [tutor, setTutor] = useState(location.state?.tutor || null); // Use state first if available
+  const {currentUser} = useSelector((state) => state.user)
 
   useEffect(() => {
     const fetchTutorData = async () => {
@@ -39,6 +41,7 @@ const [isOpen, setIsOpen] = useState(false);
   if (!tutor) {
     return <div>Loading...</div>;
   }
+
 
   return (
     <div className='flex flex-row h-screen w-full fixed left-0 top-0'>
@@ -79,7 +82,7 @@ const [isOpen, setIsOpen] = useState(false);
             <p> {tutor.other} </p>
         </div>
 
-        <button className='bg-pink-700 rounded-full h-10 w-80 mt-10 text-white'> Request </button>
+        {tutor.role=="tutor" && !currentUser.tutorList.includes(tutor._id) && <button className='bg-pink-700 rounded-full h-10 w-80 mt-10 text-white'> Request </button>}
 
       </div>
     </div>
