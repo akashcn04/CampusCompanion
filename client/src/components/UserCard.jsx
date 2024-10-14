@@ -48,10 +48,10 @@ export default function UserCard({ id }) {
 
       <div className="flex flex-col ml-5">
         <p className="font-semibold">{tutor?.username || 'Loading...'} </p>
-        <div className="flex gap-1 items-center">
+        {tutor?.role != "tutee" && <div className="flex gap-1 items-center">
           <p className="text-green-500" onClick={handleCardclick}>About</p>
           <FaExternalLinkSquareAlt />
-        </div>
+        </div>}
       </div>
     </div>
   );

@@ -41,13 +41,13 @@ export default function GetTutor() {
     }, [branch, year, list]);
 
   return (
-    <div className='flex flex-row h-screen w-full fixed left-0 top-0'>
+    <div className='flex flex-row h-screen w-full left-0 top-0'>
         
-        <div className='flex fixed left-0 top-0 h-screen w-[50px] bg-dark-blue'></div>
+        <div className='flex fixed left-0 top-0 h-screen w-[375px] bg-dark-blue'></div>
         
         <SideBar className='sticky top-0' isOpen={isOpen} setIsOpen={setIsOpen}/>
 
-        <div className='shadow-xl bg-gray-100  mb-4 min-h-[75vh] lg:min-h-[80vh] lg:min-w-[75vw] flex flex-col  items-center gap-5'>
+        <div className='mb-4 lg:min-w-[75vw] flex flex-col  items-center gap-5'>
         
         <div className='flex flex-wrap justify-between gap-16 items-center mt-10'>
 

@@ -39,7 +39,7 @@ export default function RequestCard({id}) {
 
 
   return (
-    <div className="bg-cream w-[65vw] min-h-[12vh] rounded-lg flex items-center gap-5">
+    <div className={`bg-cream w-[65vw] min-h-[12vh] rounded-lg flex items-center gap-5`}>
       
       
     <div className="ml-5">
