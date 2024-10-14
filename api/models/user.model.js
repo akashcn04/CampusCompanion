@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 const userSchema = new mongoose.Schema({
     username : {
         type : String,
@@ -63,7 +64,13 @@ const userSchema = new mongoose.Schema({
     score : {
         type : Number,
         default : 0
-    }
+    },
+    requestList : [
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : 'Request'
+        }
+    ],
  
 
 },{ timestamps : true});
