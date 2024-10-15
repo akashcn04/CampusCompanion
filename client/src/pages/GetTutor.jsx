@@ -45,9 +45,9 @@ export default function GetTutor() {
         
         <div className='flex fixed left-0 top-0 h-screen w-[375px] bg-dark-blue'></div>
         
-        <SideBar className='sticky top-0' isOpen={isOpen} setIsOpen={setIsOpen}/>
+        <SideBar className='fixed top-0' isOpen={isOpen} setIsOpen={setIsOpen}/>
 
-        <div className='mb-4 lg:min-w-[75vw] flex flex-col  items-center gap-5'>
+        <div className='mb-4 lg:min-w-[75vw] flex flex-col  items-center gap-5 ml-96'>
         
         <div className='flex flex-wrap justify-between gap-16 items-center mt-10'>
 

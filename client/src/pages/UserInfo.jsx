@@ -54,7 +54,7 @@ const [isOpen, setIsOpen] = useState(false);
 
       <SideBar className='sticky top-0' isOpen={isOpen} setIsOpen={setIsOpen}/>
 
-      <div className='shadow-xl bg-gray-100 top-0 mb-4 min-h-[75vh] lg:min-h-[80vh] lg:min-w-[75vw] flex flex-col justify-center items-center gap-5'>
+      <div className='shadow-xl bg-gray-100 top-0 mb-4 min-h-[75vh] lg:min-h-[80vh] lg:min-w-[75vw] flex flex-col justify-center items-center gap-5 ml-96'>
         <div className='flex items-center gap-6  '>  
             <CgProfile className='text-9xl'/>
             <div> 

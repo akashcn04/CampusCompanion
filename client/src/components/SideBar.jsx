@@ -52,7 +52,8 @@ export default function SideBar({isOpen,setIsOpen}) { //
   const toggleSidebar = () => setIsOpen(!isOpen);
 
   return (
-    <div className={`bg-dark-blue h-full p-5 pt-8 ${isOpen ?'w-full' : 'w-1/5'} lg:w-[375px] relative transform transition-transform`}>
+    <div className='flex relative'>
+    <div className={`bg-dark-blue h-full p-5 pt-8 ${isOpen ?'w-full' : 'w-1/5'} lg:w-[375px] fixed transform transition-transform`}>
       <div className='flex flex-col flex-wrap justify-between'>
         <FaBars  onClick={toggleSidebar}
         className= 'text-white text-2xl absolute left-3 lg:right-10 top-9 cursor-pointer lg:hidden'/>
@@ -77,6 +78,7 @@ export default function SideBar({isOpen,setIsOpen}) { //
         </div>
       </div>
     </div>   
+    </div>
   )
 
 }

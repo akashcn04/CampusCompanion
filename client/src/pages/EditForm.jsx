@@ -59,7 +59,7 @@ export default function TutorForm() {
 
       <SideBar className='sticky top-0' isOpen={isOpen} setIsOpen={setIsOpen}/>
 
-      <div className='shadow-xl bg-gray-100 mt-10 mb-4 min-h-[75vh] lg:min-h-[80vh] lg:min-w-[75vw]'>
+      <div className='shadow-xl bg-gray-100 mt-10 mb-4 min-h-[75vh] lg:min-h-[80vh] lg:min-w-[75vw] ml-96'>
         {/* <p className='text-black text-4xl font-bold mt-3 ml-96'> " Edit Form " </p> */}
 
         <form className='mt-10 ml-3 flex flex-col gap-6' onSubmit={handleSubmit}>

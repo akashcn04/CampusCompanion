@@ -75,12 +75,12 @@ export default function Home() {
 
       <div className='flex fixed left-0 top-0 h-screen w-[50px] bg-dark-blue'></div>
 
-      <SideBar className='sticky top-0' isOpen={isOpen} setIsOpen={setIsOpen}/>
+      <SideBar className='fixed top-0' isOpen={isOpen} setIsOpen={setIsOpen}/>
 
     <div className={`flex flex-col lg:flex-row m-0 ${ isOpen && 'hidden'}`}>
 
       {/* Central line */}
-      <div className='px-5 mt-0 mb-0 flex flex-col'>
+      <div className='px-5 mt-0 mb-0 flex flex-col ml-96'>
 
       <div className='flex flex-col'>
         <div className='lg:hidden mt-5 ml-4 '>
@@ -93,9 +93,9 @@ export default function Home() {
         <div className="border-t border-cream border-2 m-2">
   
         </div>
-      </div>
+      </div>    
 
-        <div className='text-3xl lg:text-4xl font-bold mt-1 lg:mt-7'>{ toRender==="students" ? "My Students : " : "My Tutors :" } </div>
+        <div className='text-3xl  lg:text-4xl font-bold mt-1 lg:mt-7'>{ toRender==="students" ? "My Students : " : "My Tutors :" } </div>
 
         <div className='shadow-xl bg-gray-100 mt-6 mb-4 min-h-[75vh] lg:min-h-[80vh] lg:min-w-[45vw]'>
             <div className='mt-3 flex flex-col gap-3 justify-center ml-3'>  
@@ -125,6 +125,8 @@ export default function Home() {
       </div>
 
     </div>
+
+
 
 
     </div>
