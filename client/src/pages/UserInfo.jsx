@@ -12,9 +12,7 @@ const TutorDetails = () => {
   const location = useLocation();
   const [tutor, setTutor] = useState(location.state?.tutor || null); // Use state first if available
   const { currentUser } = useSelector((state) => state.user);
-  const { requestedTutors } = currentUser;
-  const [isRequested, setIsRequested] = useState(false);
-  const dispatch = useDispatch()
+
 
   useEffect(() => {
     const fetchTutorData = async () => {
@@ -49,13 +47,7 @@ const TutorDetails = () => {
   }, [tutorId, tutor]); // Include tutorId as dependency
 
   // Ensure the useEffect that checks requestedTutors is called properly
-  useEffect(() => {
-    if (tutor && requestedTutors?.includes(tutor._id)) {
-      setIsRequested(true);
-    } else {
-      setIsRequested(false);
-    }
-  }, [requestedTutors, tutor]); // Add tutor as a whole object in the dependency array
+ // Add tutor as a whole object in the dependency array
 
   
   if (!tutor) {
@@ -101,7 +93,7 @@ const TutorDetails = () => {
             <p> {tutor.other} </p>
         </div>
 
-        {tutor.role=="tutor" && !currentUser.tutorList.includes(tutor._id) && tutor._id != currentUser._id && <MessageDialog from={currentUser._id} to={tutor._id} buttonLabel={isRequested ? "Request Pending" : "Request"} isRequested={isRequested}/> }
+        {tutor.role=="tutor" && !currentUser.tutorList.includes(tutor._id) && tutor._id != currentUser._id && <MessageDialog from={currentUser._id} to={tutor._id}/> }
 
         
       </div>

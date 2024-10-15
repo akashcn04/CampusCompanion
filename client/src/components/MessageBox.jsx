@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { updateUserFailure,updateUserStart,updateUserSuccess } from '../redux/user/userSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-function MessageDialog({from,to,buttonLabel,isRequested}) {
+function MessageDialog({from,to}) {
 
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
   const dispatch = useDispatch()
-
+  const navigate = useNavigate()
+  const { currentUser } = useSelector((state) => state.user);
+  const { requestedTutors } = useSelector(state => state.user); 
+  const [isRequested, setIsRequested] = useState(false);
   const openDialog = () => setIsOpen(true);
 
 
@@ -42,6 +46,9 @@ function MessageDialog({from,to,buttonLabel,isRequested}) {
     const data = await response.json()
     dispatch(updateUserSuccess(data.curr_user))
 
+    alert("Request sent")
+    navigate(0)
+
     }catch(error){
         console.log(error)
         dispatch(updateUserFailure(error.message))
@@ -51,10 +58,22 @@ function MessageDialog({from,to,buttonLabel,isRequested}) {
     closeDialog();
   };
 
+
+  useEffect(() => {
+    if (requestedTutors?.includes(to)) {
+      setIsRequested(true);
+    } else {
+      setIsRequested(false);
+    }
+  }, [requestedTutors,to])
+
+  console.log(requestedTutors)
+  console.log(to)
+
   return (
     <div>
       {/* Button to open dialog */}
-      <button onClick={openDialog}  className={`bg-pink-700 rounded-full h-10 w-80 mt-10 text-white flex items-center justify-center ${isRequested ? "opacity-65" : "opacity-100"}`} disabled={isRequested}  >{buttonLabel}</button>
+      <button onClick={openDialog}  className={`bg-pink-700 rounded-full h-10 w-80 mt-10 text-white flex items-center justify-center ${isRequested ? "opacity-65" : "opacity-100"}`} disabled={isRequested}  >{isRequested ? "Request Pending" : "Request"}</button>
 
       {/* The dialog box */}
       {isOpen && (

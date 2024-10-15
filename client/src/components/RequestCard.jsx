@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { RiChatFollowUpFill } from "react-icons/ri";
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUserFailure,updateUserStart,updateUserSuccess } from '../redux/user/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 export default function RequestCard({id}) {
 
@@ -9,6 +10,7 @@ export default function RequestCard({id}) {
     const [tutee,setTutee] = useState({})
     const {currentUser} = useSelector((state) => state.user)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     useEffect(() => {
 
@@ -60,7 +62,7 @@ export default function RequestCard({id}) {
 
       dispatch(updateUserSuccess(data.tutor_user))
       alert("Request Accepted")
-
+      navigate(0)
     }catch(error){
       dispatch(updateUserFailure(error.message))
     }
@@ -78,11 +80,13 @@ export default function RequestCard({id}) {
         },
         body: JSON.stringify({
           myId : currentUser._id,
-          requestedTuteeId : tuteeData._id,
+          requestedTuteeId : tutee._id,
           requestId : request._id
         }),
       })
 
+      alert("Request rejected")
+      navigate(0)
       
 
     }catch(error){
@@ -107,10 +111,15 @@ export default function RequestCard({id}) {
             <p>{request?.message}</p>
         </div>
 
-        <div className='flex py-2 gap-3 ml-[40vw]'>
+        {request?.state == "Active" && <div className='flex py-2 gap-3 ml-[40vw]'>
         <button className='bg-green-700 text-white rounded-full w-[5vw]' type='submit' onClick={handleAccept}> Accept </button>
         <button className='bg-red-700 text-white rounded-full w-[5vw]' type='submit' onClick={handleReject}> Reject </button>
-        </div>
+        </div>}
+
+        {request?.state != "Active" && <div className='flex py-2 gap-3 ml-[50vw]'>
+            <p className='font-semibold'> {request.state} </p>
+          </div>  
+        }
     </div>
 
     
