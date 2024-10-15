@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { RiChatFollowUpFill } from "react-icons/ri";
+import { useDispatch, useSelector } from 'react-redux';
+import { updateUserFailure,updateUserStart,updateUserSuccess } from '../redux/user/userSlice';
 
 export default function RequestCard({id}) {
 
     const [request,setRequest] = useState({})
     const [tutee,setTutee] = useState({})
+    const {currentUser} = useSelector((state) => state.user)
+    const dispatch = useDispatch()
 
     useEffect(() => {
 
@@ -36,7 +40,57 @@ export default function RequestCard({id}) {
 
     },[id])
 
+    const handleAccept = async(e) => {
+      e.preventDefault()
+      try{
+      dispatch(updateUserStart())
+      const res = await fetch("/api/request/accept",{
+        method : 'POST',
+        headers : {
+         'Content-Type' : "application/json"
+        },
+        body: JSON.stringify({
+          myId : currentUser._id,
+          requestedTuteeId : tutee._id,
+          requestId : request._id
+        }),
+      })
 
+      const data = await res.json()
+
+      dispatch(updateUserSuccess(data.tutor_user))
+      alert("Request Accepted")
+
+    }catch(error){
+      dispatch(updateUserFailure(error.message))
+    }
+
+    }
+
+    const handleReject = async (e) => {
+      e.preventDefault()
+      
+      try{
+      const res = await fetch("/api/request/reject",{
+        method : 'POST',
+        headers : {
+         'Content-Type' : "application/json"
+        },
+        body: JSON.stringify({
+          myId : currentUser._id,
+          requestedTuteeId : tuteeData._id,
+          requestId : request._id
+        }),
+      })
+
+      
+
+    }catch(error){
+      dispatch(updateUserFailure(error.message))
+    }
+
+
+    } 
 
   return (
     <div className={`bg-cream w-[65vw] min-h-[12vh] rounded-lg flex items-center gap-5`}>
@@ -50,13 +104,12 @@ export default function RequestCard({id}) {
         <p className='text-xl font-semibold'>{tutee.username} </p>
 
         <div className='bg-slate-50 p-2 rounded-md max-w-[63vw]'>
-            <p>{request.message}</p>
+            <p>{request?.message}</p>
         </div>
 
         <div className='flex py-2 gap-3 ml-[40vw]'>
-        <button className='bg-blue-900 text-white rounded-full w-[5vw]' type='submit'> Info </button>
-        <button className='bg-green-700 text-white rounded-full w-[5vw]' type='submit'> Accept </button>
-        <button className='bg-red-700 text-white rounded-full w-[5vw]' type='submit'> Reject </button>
+        <button className='bg-green-700 text-white rounded-full w-[5vw]' type='submit' onClick={handleAccept}> Accept </button>
+        <button className='bg-red-700 text-white rounded-full w-[5vw]' type='submit' onClick={handleReject}> Reject </button>
         </div>
     </div>
 

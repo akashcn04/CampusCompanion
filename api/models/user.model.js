@@ -65,12 +65,24 @@ const userSchema = new mongoose.Schema({
         type : Number,
         default : 0
     },
-    requestList : [
+    recievedRequestList : [
         {
             type : mongoose.Schema.Types.ObjectId,
             ref : 'Request'
         }
     ],
+    sentRequestList : [
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : 'Request'
+        }
+    ],
+    requestedTutors : [
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : 'User'
+        }
+    ]
  
 
 },{ timestamps : true});

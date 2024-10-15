@@ -2,29 +2,31 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import SideBar from '../components/SideBar';
 import { CgProfile } from "react-icons/cg";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MessageDialog from '../components/MessageBox';
+import { updateUserStart,updateUserSuccess,updateUserFailure } from '../redux/user/userSlice';
 
 const TutorDetails = () => {
-const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const { tutorId } = useParams(); // Extract tutorId from URL
   const location = useLocation();
   const [tutor, setTutor] = useState(location.state?.tutor || null); // Use state first if available
-  const {currentUser} = useSelector((state) => state.user)
-
-
+  const { currentUser } = useSelector((state) => state.user);
+  const { requestedTutors } = currentUser;
+  const [isRequested, setIsRequested] = useState(false);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const fetchTutorData = async () => {
       try {
+
+
         const response = await fetch('/api/user/info', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            "id" : tutorId
-          }),
+          body: JSON.stringify({ id: tutorId }),
         });
 
         if (!response.ok) {
@@ -33,19 +35,32 @@ const [isOpen, setIsOpen] = useState(false);
 
         const data = await response.json();
         setTutor(data);
+
       } catch (error) {
         console.error('Error fetching tutor data:', error);
+
       }
     };
 
-    fetchTutorData();
-  }, []);
+  
+    if (!tutor) {
+      fetchTutorData();
+    }
+  }, [tutorId, tutor]); // Include tutorId as dependency
 
+  // Ensure the useEffect that checks requestedTutors is called properly
+  useEffect(() => {
+    if (tutor && requestedTutors?.includes(tutor._id)) {
+      setIsRequested(true);
+    } else {
+      setIsRequested(false);
+    }
+  }, [requestedTutors, tutor]); // Add tutor as a whole object in the dependency array
+
+  
   if (!tutor) {
     return <div>Loading...</div>;
   }
-
- 
 
   return (
     <div className='flex flex-row h-screen w-full fixed left-0 top-0'>
@@ -86,7 +101,7 @@ const [isOpen, setIsOpen] = useState(false);
             <p> {tutor.other} </p>
         </div>
 
-        {tutor.role=="tutor" && !currentUser.tutorList.includes(tutor._id) && tutor._id != currentUser._id && <MessageDialog from={currentUser._id} to={tutor._id}/> }
+        {tutor.role=="tutor" && !currentUser.tutorList.includes(tutor._id) && tutor._id != currentUser._id && <MessageDialog from={currentUser._id} to={tutor._id} buttonLabel={isRequested ? "Request Pending" : "Request"} isRequested={isRequested}/> }
 
         
       </div>

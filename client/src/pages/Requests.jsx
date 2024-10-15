@@ -8,9 +8,9 @@ export default function Requests() {
   const [isOpen,setIsOpen] = useState();  
 
   const {currentUser} = useSelector((state) => state.user)
-  const {requestList} = currentUser
+  const {recievedRequestList} = currentUser
 
-  console.log(requestList)
+  console.log(recievedRequestList)
 
   return (
     <div className='flex flex-row h-screen w-full left-0 top-0'>
@@ -21,7 +21,7 @@ export default function Requests() {
 
       <div className='mt-3 flex flex-col gap-3 ml-96'>  
         {
-          requestList?.map((id,index) => (<RequestCard id={id} key={index}/>))
+          recievedRequestList?.map((id,index) => (<RequestCard id={id} key={index}/>))
         }
       </div>
         

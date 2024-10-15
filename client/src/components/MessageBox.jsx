@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { updateUserFailure,updateUserStart,updateUserSuccess } from '../redux/user/userSlice';
+import { useDispatch } from 'react-redux';
 
-function MessageDialog({from,to}) {
+function MessageDialog({from,to,buttonLabel,isRequested}) {
 
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
-
+  const dispatch = useDispatch()
 
   const openDialog = () => setIsOpen(true);
 
@@ -23,6 +25,8 @@ function MessageDialog({from,to}) {
 
     try{
 
+      dispatch(updateUserStart())
+
     const response = fetch("/api/request/createRequest",{
         method : "POST",
         headers: {
@@ -36,9 +40,11 @@ function MessageDialog({from,to}) {
     })
 
     const data = await response.json()
+    dispatch(updateUserSuccess(data.curr_user))
 
     }catch(error){
         console.log(error)
+        dispatch(updateUserFailure(error.message))
     }
 
 
@@ -48,7 +54,7 @@ function MessageDialog({from,to}) {
   return (
     <div>
       {/* Button to open dialog */}
-      <button onClick={openDialog}  className='bg-pink-700 rounded-full h-10 w-80 mt-10 text-white flex items-center justify-center'    >Request</button>
+      <button onClick={openDialog}  className={`bg-pink-700 rounded-full h-10 w-80 mt-10 text-white flex items-center justify-center ${isRequested ? "opacity-65" : "opacity-100"}`} disabled={isRequested}  >{buttonLabel}</button>
 
       {/* The dialog box */}
       {isOpen && (
